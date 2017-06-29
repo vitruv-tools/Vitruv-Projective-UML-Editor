@@ -33,7 +33,7 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.Package;
 
-import tools.vitruv.framework.util.bridges.EMFBridge;
+import edu.kit.ipd.sdq.commons.util.org.eclipse.core.resources.IResourceUtil;
 
 /**
  * This resource represents a java package as a JaMoPP model. It expects the
@@ -110,7 +110,7 @@ public class PackageResource extends ResourceImpl {
 	private void addJavaFileToPackage(IResource javaFileResource, Package javaPackage) {
 		logger.info("Loading file: " + javaFileResource.getFullPath());
 		if (javaFileResource.getType() == IResource.FILE && javaFileResource.getFileExtension().equals("java")) {
-			Resource sourceRes = resourceSet.getResource(EMFBridge.getEMFPlatformUriForIResource(javaFileResource), true);
+			Resource sourceRes = resourceSet.getResource(IResourceUtil.getEMFPlatformURI(javaFileResource), true);
 			if (!sourceRes.getContents().isEmpty() && sourceRes.getContents().get(0) instanceof CompilationUnit) {
 				javaPackage.getCompilationUnits().add((CompilationUnit) sourceRes.getContents().get(0));
 			}

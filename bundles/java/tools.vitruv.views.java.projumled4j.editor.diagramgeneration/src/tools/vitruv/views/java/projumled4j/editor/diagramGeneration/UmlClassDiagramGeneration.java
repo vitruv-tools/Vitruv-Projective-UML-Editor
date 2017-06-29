@@ -50,7 +50,7 @@ import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.emftext.language.java.resource.IExtendedJavaOptions;
 
-import tools.vitruv.framework.util.bridges.EMFBridge;
+import edu.kit.ipd.sdq.commons.util.org.eclipse.core.resources.IResourceUtil;
 import tools.vitruv.views.java.projumled4j.annotations.ClasspathInjection;
 
 /**
@@ -139,7 +139,7 @@ public class UmlClassDiagramGeneration {
 	private Session loadSiriusSession() throws CoreException {
 		progressMonitor.subTask("Load Sirius session");
 		IFile airdFile = javaPackage.getJavaProject().getProject().getFile("representations.aird");
-		URI airdFileURI = EMFBridge.getEMFPlatformUriForIResource(airdFile);
+		URI airdFileURI = IResourceUtil.getEMFPlatformURI(airdFile);
 		if (!airdFile.exists()) {
 			logger.info("Representations file: " + airdFile.getFullPath());
 			ModelingProjectManager.INSTANCE.createLocalRepresentationsFile(javaPackage.getJavaProject().getProject(), dummyProgressMonitor);
@@ -183,7 +183,7 @@ public class UmlClassDiagramGeneration {
 		
 		AssociationGenerator associationGenerator = new AssociationGenerator();
 		for (ICompilationUnit folderMember : javaPackage.getCompilationUnits()) {
-			URI compilationUnitURI = EMFBridge.getEMFPlatformUriForIResource(folderMember.getResource());
+			URI compilationUnitURI = IResourceUtil.getEMFPlatformURI(folderMember.getResource());
 			associationGenerator.createAssociationsInsidePackageInCompilationUnit(compilationUnitURI);
 			addJavaResourceToSession(session, folderMember);
 		}
@@ -203,7 +203,7 @@ public class UmlClassDiagramGeneration {
 
 	private void addJavaResourceToSession(Session session, ICompilationUnit compilationUnit) {
 		progressMonitor.subTask("Load java resource: " + compilationUnit.getElementName());
-		URI fileURI = EMFBridge.getEMFPlatformUriForIResource(compilationUnit.getResource());
+		URI fileURI = IResourceUtil.getEMFPlatformURI(compilationUnit.getResource());
 		logger.info("Add semantic resource: " + fileURI);
 		addResourceToSession(session, fileURI);
 	}

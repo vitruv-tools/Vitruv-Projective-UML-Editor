@@ -56,11 +56,11 @@ Require-Bundle: org.eclipse.core.runtime,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
- org.eclipse.xtend.lib.macro
+ org.eclipse.xtend.lib.macro,
+ edu.kit.ipd.sdq.commons.util.eclipse
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Import-Package: tools.vitruv.framework.util.bridges,
- tools.vitruv.views.java.projumled4j.annotations,
+Import-Package: tools.vitruv.views.java.projumled4j.annotations,
  tools.vitruv.views.java.projumled4j.util,
  org.apache.log4j,
  org.emftext.language.java,
